@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./src/assets/favicon.svg" />
+		<link rel="stylesheet" href="./node_modules/reveal.js/dist/reveal.css" />
+		<link rel="stylesheet" href="./src/theme/onepoint.scss" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Qwik, rapidement</title>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section><h1>Qwik, rapidement</h1></section>
+				<section>
+					<h2>Benjamin Legrand</h2>
+					<ul>
+						<li>Tech lead @ Onepoint</li>
+						<li>Angular lover</li>
+						<li>Typescript fanboy</li>
+						<li>Musicien ( bendubik )</li>
+					</ul>
+					<aside class="notes">Shhh, these are your private notes 📝</aside>
+				</section>
+				<section>
+					<section data-markdown>
+						## Qwik, rapidement
+						<img src="./src/assets/1.qwik-logo.svg" alt="Qwik logo" />
+					</section>
+					<section>
+						<h3>Qwik historique</h3>
+						<ul>
+							<li>
+								Créé en 2021 par Misko Gechev ( AngularJS / Angular @ google )
+							</li>
+							<li>
+								Backé par builder.io (Partytown / Mitosis / Figma&lt;-&gt;HTML)
+							</li>
+							<li>https://qwik.builder.io</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Qwik, une promesse</h3>
+						<img /><!-- TODO image lighthouse 100% perf -->
+						<ul>
+							<li>Page load</li>
+							<li>No Hydratation</li>
+							<li>Time to Interactive</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>SPA, Single Page Application</h3>
+						<!-- TODO, maybe google trend graphs -->
+						<aside class="notes">
+							<ul>
+								<li>Historiquement page -> server</li>
+								<li>Certaines app déjà dans les années 1990</li>
+								<li>GMail, AngularJS</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<p>Qu'attends-on d'un framework "SPA"</p>
+						<ul>
+							<li>URL-based routing (#/hash)</li>
+							<li>Client Side Rendering</li>
+							<li>Component-based</li>
+						</ul>
+					</section>
+					<section>
+						1er problème :
+						<!-- todo loading wheel + page vide -->
+
+						<aside class="notes">
+							<ul>
+								<li>On dépends énormément du JS à cause du CSR</li>
+								<li>Tant qu'on a pas tout le JS</li>
+								<li>technique shadow éléments etc...</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						2e problème :
+						<p>Core Web vitals</p>
+						<ul>
+							<li><b>LCP</b>: rapidité d'affichage</li>
+							<li><b>FID/TTI</b>: interactivité</li>
+							<li><b>CLS</b>: stabilité visuelle</li>
+						</ul>
+						<aside class="notes">
+							<p>Depuis 2020, pris en compte par le pagerank google</p>
+							<ul>
+								<li>Largest Contenful Paint: rapidité d'affichage</li>
+								<li></li>
+								<li>
+									First input delay/TTI: rapidité de chargement / utilisabilité
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						Une solution
+						<ul>
+							<li class="fragment">Server-Side-Rendering</li>
+							<li class="fragment">
+								Javascript IsoMorphe / Universal (node.js)
+							</li>
+							<li class="fragment">
+								Nouveau problème: réconcilier serveur et client
+							</li>
+						</ul>
+					</section>
+					<section>
+						Comparaison de frameworks avec leur solution SSR:
+						<table>
+							<tr>
+								<th>React</th>
+								<th>Next.js</th>
+							</tr>
+							<tr>
+								<th>Vue</th>
+								<th>Nuxt</th>
+							</tr>
+							<tr>
+								<td>angular</td>
+								<td>@angular/universal</td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h2>L'Hydratation</h2>
+						<p>qu'est ce que c'est ?</p>
+						<ul>
+							<li class="fragment"><del>boire de l'eau</del></li>
+							<li class="fragment">
+								Re-connecter le HTML généré par le serveur avec le javascript du
+								client
+							</li>
+							<li class="fragment">
+								re-construire l'arbre de composant, re-connecter les events
+								listener
+							</li>
+							<li class="fragment">
+								on dépends toujours du JS => Time to interactive pas bon
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>La résumabilité</h2>
+						<!-- TODO https://qwik.builder.io/docs/concepts/resumable -->
+						<ul>
+							<li class="fragment">Listeners sont "sérializés"</li>
+							<li></li>
+						</ul>
+						<code class="fragment hljs" data-trim>
+							<script type="text/template">
+								<button onClickQrl="./chunk.js#handler_symbol">click me</button>
+							</script>
+						</code>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Qwik: Principes de base</h3>
+						<ul>
+							<li>Retarder le plus possible l'exécution du JS</li>
+							<li>Sérialiser le plus de choses dans le DOM</li>
+						</ul>
+					</section>
+					<section data-auto-animate>
+						<h3 data-id="code-title">le QwikLoader</h3>
+						<pre data-id="code-animation">
+							<code class="hljs" data-trim data-line-numbers="|4|3|2">
+								<script type="text/template">
+									<html>
+										<body q:base="/build/">
+											<button onClickQrl="./myHandler.js#clickHandler">push me</button>
+											<!--<script>/* Qwikloader */</script>-->
+										</body>
+									</html>
+								</script>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Component / $syntax</h3>
+						<code class="hljs" language="tsx" data-trim>
+							<script type="text/template">
+								export const Counter = component$(() => {
+									const state = useStore({
+										count: 0,
+									});
+									return (
+										<Host>
+											<div>Value is: ${state.count}</div>
+											<button onClick$={() => state.count++}>Increment</button>
+										</Host>
+									);
+								});
+							</script>
+						</code>
+						<aside class="notes">
+							Qwik est component-based, sur du JSX
+							JSX => mélanger du XML dans du JS.
+						</aside>
+					</section>
+					<section>
+						<h3>React equivalent</h3>
+						<code class="hljs" language="tsx" data-trim>
+							<script type="text/template">
+								export function Counter() {
+									const [count, setCount] = useState(0);
+									return (
+										<>
+										<div>
+											Value is: ${count}
+										</div>
+										<button onClick$={() => setCount(count + 1)}>
+											Increment
+										</button>
+										</>
+									)
+								}
+							</script>
+						</code>
+					</section>
+					<section>
+						useStyle
+					</section>
+				</section>
+				<section>
+					<h2>The optimizer</h2>
+				</section>
+				<section>
+					<h2>Serialisation</h2>
+					<p>q:obj</p>
+				</section>
+				<section>
+					<h2>Client / Server</h2>
+				</section>
+				<section>
+					<h2>Scoped styles</h2>
+				</section>
+				<section>
+					<h2>Qwik city</h2>
+				</section>
+				<section>
+					<h2>Conclusion</h2>
+					<section>
+						<h2>Go further / other solutions</h2>
+						<ul>
+							<li>Astro</li>
+							<li>Marko</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Feature comparution matrix</h3>
+					</section>
+					<section>
+						<h3>Questions ?</h3>
+					</section>
+				</section>
+			</div>
+		</div>
+		<script type="module" src="./src/index.ts"></script>
+	</body>
+</html>
