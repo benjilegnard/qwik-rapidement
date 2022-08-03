@@ -12,8 +12,7 @@
 
 
 // Include theme-specific fonts
-@import url(/node_modules/reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css);
-
+@import url('https://fonts.bunny.net/css2?family=Poppins:wght@700&family=Source+Sans+Pro&display=swap');
 
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #191919;
@@ -23,7 +22,7 @@ $headingColor: #fff;
 
 $mainFontSize: 42px;
 $mainFont: 'Source Sans Pro', Helvetica, sans-serif;
-$headingFont: 'Source Sans Pro', Helvetica, sans-serif;
+$headingFont: 'Poppins', Helvetica, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
