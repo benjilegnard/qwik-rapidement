@@ -2,23 +2,40 @@
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./src/assets/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="./src/assets/favicon.svg" />
 		<link rel="stylesheet" href="./node_modules/reveal.js/dist/reveal.css" />
 		<link rel="stylesheet" href="./src/theme/onepoint.scss" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Qwik, rapidement</title>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section><h1>Qwik, rapidement</h1></section>
+				<section>
+					<h1>Qwik, rapidement</h1>
+					<aside class="notes">
+						<ul>
+							<li>Welcome, ice breaker etc...</li>
+							<li>Qui a lu la doc de Qwik ?</li>
+							<li>
+								Qui est là pour garder la place avant keynote de fermeture ?
+							</li>
+						</ul>
+					</aside>
+				</section>
 				<section>
 					<h2>Benjamin Legrand</h2>
+					<img
+						src="/assets/2.ma-gueule.png"
+						alt="Benjamin Legrand's profile picture"
+						class="round"
+					/>
 					<ul>
 						<li>Tech lead @ Onepoint</li>
-						<li>Angular lover</li>
+						<li>Angular adept</li>
 						<li>Typescript fanboy</li>
-						<li>Musicien ( bendubik )</li>
+						<li>Musicien ( @bendubik )</li>
+						<li>@benjilegnard</li>
 					</ul>
 					<aside class="notes">Shhh, these are your private notes 📝</aside>
 				</section>
@@ -28,7 +45,7 @@
 						<img src="./src/assets/1.qwik-logo.svg" alt="Qwik logo" />
 					</section>
 					<section>
-						<h3>Qwik historique</h3>
+						<h3>Qwik, historique</h3>
 						<ul>
 							<li>
 								Créé en 2021 par Misko Gechev ( AngularJS / Angular @ google )
@@ -36,6 +53,7 @@
 							<li>
 								Backé par builder.io (Partytown / Mitosis / Figma&lt;-&gt;HTML)
 							</li>
+							<li>HTML First</li>
 							<li>https://qwik.builder.io</li>
 						</ul>
 					</section>
@@ -43,8 +61,9 @@
 						<h3>Qwik, une promesse</h3>
 						<img /><!-- TODO image lighthouse 100% perf -->
 						<ul>
-							<li>Page load</li>
-							<li>No Hydratation</li>
+							<li>Temps de chargement &lt; 1s</li>
+							<li>Pas d'Hydratation</li>
+							<li>Moins de 1k de js</li>
 							<li>Time to Interactive</li>
 						</ul>
 					</section>
@@ -62,7 +81,7 @@
 						</aside>
 					</section>
 					<section>
-						<p>Qu'attends-on d'un framework "SPA"</p>
+						<p>Qu'attends-on d'un framework "SPA" ?</p>
 						<ul>
 							<li>URL-based routing (#/hash)</li>
 							<li>Client Side Rendering</li>
@@ -78,6 +97,7 @@
 								<li>On dépends énormément du JS à cause du CSR</li>
 								<li>Tant qu'on a pas tout le JS</li>
 								<li>technique shadow éléments etc...</li>
+								<li>C'est un problème parce que web vitals</li>
 							</ul>
 						</aside>
 					</section>
@@ -113,22 +133,30 @@
 						</ul>
 					</section>
 					<section>
-						Comparaison de frameworks avec leur solution SSR:
+						Frameworks et leur solution SSR:
 						<table>
 							<tr>
-								<th>React</th>
-								<th>Next.js</th>
+								<td>React</td>
+								<td>Next.js</td>
 							</tr>
 							<tr>
-								<th>Vue</th>
-								<th>Nuxt</th>
+								<td>Vue</td>
+								<td>Nuxt</td>
 							</tr>
 							<tr>
 								<td>angular</td>
-								<td>@angular/universal</td>
+								<td>@nguniversal</td>
 							</tr>
 						</table>
 					</section>
+					<section>
+						<h3>Principe du SSR</h3>
+						<ul>
+							<li>renderToString()</li>
+						</ul>
+					</section>
+				</section>
+				<section>
 					<section>
 						<h2>L'Hydratation</h2>
 						<p>qu'est ce que c'est ?</p>
@@ -148,17 +176,26 @@
 						</ul>
 					</section>
 					<section>
+						<h2>Hydratation vs résumabilité</h2>
+						<img src="/assets/hydrate-vs-resume.drawio.svg" />
+					</section>
+					<section>
 						<h2>La résumabilité</h2>
 						<!-- TODO https://qwik.builder.io/docs/concepts/resumable -->
 						<ul>
-							<li class="fragment">Listeners sont "sérializés"</li>
-							<li></li>
+							<li class="fragment">
+								Les écouteurs d'évènement sont "sérializés"
+							</li>
+							<li>
+								<pre>
+									<code class="fragment hljs" data-trim>
+										<script type="text/template">
+											<button onClickQrl="./chunk.js#handler_symbol">click me</button>
+										</script>
+									</code>
+								</pre>
+							</li>
 						</ul>
-						<code class="fragment hljs" data-trim>
-							<script type="text/template">
-								<button onClickQrl="./chunk.js#handler_symbol">click me</button>
-							</script>
-						</code>
 					</section>
 				</section>
 				<section>
@@ -172,12 +209,12 @@
 					<section data-auto-animate>
 						<h3 data-id="code-title">le QwikLoader</h3>
 						<pre data-id="code-animation">
-							<code class="hljs" data-trim data-line-numbers="|4|3|2">
+							<code class="hljs" language="html" data-trim data-line-numbers="|4|3|2">
 								<script type="text/template">
 									<html>
 										<body q:base="/build/">
 											<button onClickQrl="./myHandler.js#clickHandler">push me</button>
-											<!--<script>/* Qwikloader */</script>-->
+											<script>/* Qwikloader */<script>
 										</body>
 									</html>
 								</script>
@@ -186,7 +223,8 @@
 					</section>
 					<section>
 						<h3>Component / $syntax</h3>
-						<code class="hljs" language="tsx" data-trim>
+						<pre>
+						<code class="hljs language-typescript" language="typescript" data-trim data-id="code-animation">
 							<script type="text/template">
 								export const Counter = component$(() => {
 									const state = useStore({
@@ -201,14 +239,16 @@
 								});
 							</script>
 						</code>
+					</pre>
 						<aside class="notes">
-							Qwik est component-based, sur du JSX
-							JSX => mélanger du XML dans du JS.
+							Qwik est component-based, sur du JSX JSX => mélanger du XML dans
+							du JS. - très proche de React dans l'idée
 						</aside>
 					</section>
 					<section>
 						<h3>React equivalent</h3>
-						<code class="hljs" language="tsx" data-trim>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
 							<script type="text/template">
 								export function Counter() {
 									const [count, setCount] = useState(0);
@@ -225,13 +265,21 @@
 								}
 							</script>
 						</code>
+						</pre>
 					</section>
 					<section>
-						useStyle
+						<h3>useStyle</h3>
+						<ul>
+							<li>styles scopés aux composants</li>
+						</ul>
 					</section>
 				</section>
 				<section>
 					<h2>The optimizer</h2>
+					<ul>
+						<li>Basé sur [Vite](https://vitejs.dev/)</li>
+						<li>Plugin Vite</li>
+					</ul>
 				</section>
 				<section>
 					<h2>Serialisation</h2>
@@ -239,6 +287,10 @@
 				</section>
 				<section>
 					<h2>Client / Server</h2>
+					<ul>
+						<li>api fetch()</li>
+						<li>node-fetch polyfill</li>
+					</ul>
 				</section>
 				<section>
 					<h2>Scoped styles</h2>
