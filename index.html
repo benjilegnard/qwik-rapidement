@@ -13,49 +13,55 @@
 			<div class="slides">
 				<section>
 					<h1>Qwik, rapidement</h1>
-					<aside class="notes">
-						<ul>
-							<li>Welcome, ice breaker etc...</li>
-							<li>Qui a lu la doc de Qwik ?</li>
-							<li>
-								Qui est là pour garder la place avant keynote de fermeture ?
-							</li>
-						</ul>
-					</aside>
 				</section>
 				<section>
-					<h2>Benjamin Legrand</h2>
-					<img
-						src="/assets/2.ma-gueule.png"
-						alt="Benjamin Legrand's profile picture"
-						class="round"
-					/>
-					<ul>
-						<li>Tech lead @ Onepoint</li>
-						<li>Angular adept</li>
-						<li>Typescript fanboy</li>
-						<li>Musicien ( @bendubik )</li>
-						<li>@benjilegnard</li>
-					</ul>
-					<aside class="notes">Shhh, these are your private notes 📝</aside>
-				</section>
-				<section>
-					<section data-markdown>
-						## Qwik, rapidement
-						<img src="./src/assets/1.qwik-logo.svg" alt="Qwik logo" />
+					<section>
+						<h2>Qwik</h2>
+						<img
+							src="/assets/qwik-logo.svg"
+							alt="Qwik logo"
+							style="width: 400px; height: 400px"
+						/>
+						<aside class="notes">
+							<ul>
+								<li>Welcome, ice breaker etc...</li>
+								<li>Qui a déjà entendu parler de Qwik ?</li>
+								<li>Qui a lu la doc de Qwik ?</li>
+								<li>
+									Qui est là pour garder la place avant keynote de fermeture ?
+								</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Qwik, historique</h3>
-						<ul>
-							<li>
-								Créé en 2021 par Misko Gechev ( AngularJS / Angular @ google )
-							</li>
-							<li>
-								Backé par builder.io (Partytown / Mitosis / Figma&lt;-&gt;HTML)
-							</li>
-							<li>HTML First</li>
-							<li>https://qwik.builder.io</li>
-						</ul>
+						<table class="fragment">
+							<tr>
+								<td>
+									<img
+										src="/assets/misko-hevery.jpg"
+										alt="Misko Hevery's profile pictu1.re"
+										class="round"
+									/>
+								</td>
+								<td>
+									<ul>
+										<li>Créé par Misko Hevery</li>
+										<li>Open-sourced fin 2021</li>
+										<li class="fragment">Backé par builder.io</li>
+										<li class="fragment">HTML First, "zero JS"</li>
+										<li class="fragment">https://qwik.builder.io</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<aside class="notes">
+							<ul>
+								<li>Misko créateur d'angularJS, co-créateur d'angular 2</li>
+								<li>Builder.io: (Partytown / Mitosis / Figma&lt;-&gt;HTML)</li>
+								<li>Co créateurs de Stencil (Manu almeida / Adam bradley)</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Qwik, une promesse</h3>
@@ -64,9 +70,37 @@
 							<li>Temps de chargement &lt; 1s</li>
 							<li>Pas d'Hydratation</li>
 							<li>Moins de 1k de js</li>
-							<li>Time to Interactive</li>
+							<li>Time to Interactive de folie</li>
 						</ul>
+						<aside class="notes">
+							Qwik nous promet des performances folle car très peu de JS On va
+							donc voir comment ça marche et pourquoi. Générique.
+						</aside>
 					</section>
+				</section>
+				<section>
+					<h2>Benjamin Legrand</h2>
+					<table>
+						<tr>
+							<td>
+								<img
+									src="/assets/benjamin-legrand.png"
+									alt="Benjamin Legrand's profile picture"
+									class="round"
+									style="width: 400px; height: 400px"
+								/>
+							</td>
+							<td>
+								<ul>
+									<li>Tech lead @ Onepoint</li>
+									<li>Angular fanboy</li>
+									<li>Typescript addict</li>
+									<li>Musicien (@bendubik)</li>
+									<li>@benjilegnard</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
 				</section>
 				<section>
 					<section>
@@ -81,17 +115,33 @@
 						</aside>
 					</section>
 					<section>
-						<p>Qu'attends-on d'un framework "SPA" ?</p>
+						<h4>Qu'attends-on d'un framework "SPA" ?</h4>
 						<ul>
 							<li>URL-based routing (#/hash)</li>
 							<li>Client Side Rendering</li>
 							<li>Component-based</li>
 						</ul>
+						<aside class="notes">
+							<ul>
+								<li>rendre la donnée,</li>
+								<li>template HTML,</li>
+								<li>arbre de composant</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
-						1er problème :
+						<h4>1er problème :</h4>
 						<!-- todo loading wheel + page vide -->
-
+						<table role="presentation">
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
 						<aside class="notes">
 							<ul>
 								<li>On dépends énormément du JS à cause du CSR</li>
@@ -102,7 +152,7 @@
 						</aside>
 					</section>
 					<section>
-						2e problème :
+						<h4>2e problème :</h4>
 						<p>Core Web vitals</p>
 						<ul>
 							<li><b>LCP</b>: rapidité d'affichage</li>
@@ -113,15 +163,15 @@
 							<p>Depuis 2020, pris en compte par le pagerank google</p>
 							<ul>
 								<li>Largest Contenful Paint: rapidité d'affichage</li>
-								<li></li>
 								<li>
 									First input delay/TTI: rapidité de chargement / utilisabilité
 								</li>
+								<li>Content Layout Shift OSEF</li>
 							</ul>
 						</aside>
 					</section>
 					<section>
-						Une solution
+						<h3>Une solution</h3>
 						<ul>
 							<li class="fragment">Server-Side-Rendering</li>
 							<li class="fragment">
@@ -131,10 +181,23 @@
 								Nouveau problème: réconcilier serveur et client
 							</li>
 						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Utiliser le même framework SPA coté serveur</li>
+								<li></li>
+								<li>Re-connecter les deux</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
-						Frameworks et leur solution SSR:
+						<h3>Frameworks SPA</h3>
 						<table>
+							<thead>
+								<tr>
+									<th>Framework</th>
+									<th>/ SSR Solution</th>
+								</tr>
+							</thead>
 							<tr>
 								<td>React</td>
 								<td>Next.js</td>
@@ -147,13 +210,23 @@
 								<td>angular</td>
 								<td>@nguniversal</td>
 							</tr>
+							<tr>
+								<td>Ember.js</td>
+								<td>Fastboost</td>
+							</tr>
 						</table>
+						<aside class="notes">J'ai mis Ember pour troller</aside>
 					</section>
 					<section>
 						<h3>Principe du SSR</h3>
 						<ul>
+							<li>à chaque request de page</li>
 							<li>renderToString()</li>
+							<li>event listener coté back ?</li>
 						</ul>
+						<aside class="notes">
+							Incroyable non ? warning fuite mémoire. Maintenant qu'on a vu tout
+						</aside>
 					</section>
 				</section>
 				<section>
@@ -198,6 +271,9 @@
 						</ul>
 					</section>
 				</section>
+				<!--
+					CODE DETAILS
+				-->
 				<section>
 					<section>
 						<h3>Qwik: Principes de base</h3>
@@ -220,26 +296,38 @@
 								</script>
 							</code>
 						</pre>
+						<aside class="notes">
+							Qwikloader is: small: 1 kb minified. fast: 5ms delivered inline in
+							the dom GOAL:
+							<ul>
+								<li>register global browser events.</li>
+								<li>
+									if an event occurs, search the DOM for the corresponding event
+									attribute pointing to the QRL to lazy-load.
+								</li>
+								<li>Lazy-load the event handler and execute it.</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Component / $syntax</h3>
 						<pre>
-						<code class="hljs language-typescript" language="typescript" data-trim data-id="code-animation">
-							<script type="text/template">
-								export const Counter = component$(() => {
-									const state = useStore({
-										count: 0,
+							<code class="hljs language-typescript" language="typescript" data-trim data-id="code-animation">
+								<script type="text/template">
+									export const Counter = component$(() => {
+										const state = useStore({
+											count: 0,
+										});
+										return (
+											<Host>
+												<div>Value is: ${state.count}</div>
+												<button onClick$={() => state.count++}>Increment</button>
+											</Host>
+										);
 									});
-									return (
-										<Host>
-											<div>Value is: ${state.count}</div>
-											<button onClick$={() => state.count++}>Increment</button>
-										</Host>
-									);
-								});
-							</script>
-						</code>
-					</pre>
+								</script>
+							</code>
+						</pre>
 						<aside class="notes">
 							Qwik est component-based, sur du JSX JSX => mélanger du XML dans
 							du JS. - très proche de React dans l'idée
@@ -268,47 +356,128 @@
 						</pre>
 					</section>
 					<section>
-						<h3>useStyle</h3>
+						<h3>Feature: transclusion</h3>
+						<pre>
+							<!-- todo show slot example -->
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								export function Counter() {
+									const [count, setCount] = useState(0);
+									return (
+										<>
+										<div>
+											Value is: ${count}
+										</div>
+										<button onClick$={() => setCount(count + 1)}>
+											Increment
+										</button>
+										</>
+									)
+								}
+							</script>
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Feature: hooks / useState</h3>
+						<ul>
+							<li>styles scopés aux composants</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Feature: async rendering</h3>
 						<ul>
 							<li>styles scopés aux composants</li>
 						</ul>
 					</section>
 				</section>
+				<!--
+					INTERNALS OF THE FRAMEWORK
+				-->
 				<section>
-					<h2>The optimizer</h2>
-					<ul>
-						<li>Basé sur [Vite](https://vitejs.dev/)</li>
-						<li>Plugin Vite</li>
-					</ul>
+					<section>
+						<h2>The optimizer</h2>
+						<ul>
+							<li>Basé sur [Vite](https://vitejs.dev/)</li>
+							<li>Plugin Vite</li>
+						</ul>
+					</section>
+					<!-- TODO more slide on the optimizer -->
 				</section>
 				<section>
-					<h2>Serialisation</h2>
-					<p>q:obj</p>
+					<section>
+						<h2>Serialisation</h2>
+						<p>q:obj</p>
+					</section>
+					<!-- TODO more slide on serialization -->
 				</section>
 				<section>
-					<h2>Client / Server</h2>
-					<ul>
-						<li>api fetch()</li>
-						<li>node-fetch polyfill</li>
-					</ul>
+					<section>
+						<h2>Client / Server</h2>
+						<ul>
+							<li>api fetch()</li>
+							<li>node-fetch polyfill</li>
+						</ul>
+						<aside class="notes">OK</aside>
+					</section>
 				</section>
 				<section>
-					<h2>Scoped styles</h2>
+					<section>
+						<h2>Scoped styles</h2>
+						<ul>
+							<li>useStyles()</li>
+							<li>contextualisés par composant</li>
+						</ul>
+						<aside class="notes">
+							à noter principalement que Qwik fournit une solution native de
+							CSS-in-JS
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Qwik city</h2>
+						<ul>
+							<li>Meta-framework</li>
+							<li>page based routing (MDX)</li>
+						</ul>
+					</section>
+					<section>
+						<!-- todo explain page based routing-->
+						<pre>
+							| index.mdx
+							| -> /product/[slug].mdx
+							| -> /user/[id].mdx
+						</pre
+						>
+					</section>
+					<section>
+						<h3>&lt;head&gt; management</h3>
+						<!-- todo explain head-->
+					</section>
 				</section>
 				<section>
-					<h2>Qwik city</h2>
-				</section>
-				<section>
-					<h2>Conclusion</h2>
+					<section>
+						<h2>Conclusion</h2>
+					</section>
+					<section>
+						<h3>Feature comparution matrix</h3>
+					</section>
 					<section>
 						<h2>Go further / other solutions</h2>
 						<ul>
-							<li>Astro</li>
+							<li>Fresh (deno)</li>
 							<li>Marko</li>
 						</ul>
 					</section>
 					<section>
-						<h3>Feature comparution matrix</h3>
+						<h3>How do i ?</h3>
+						<ul>
+							<li>qwikify</li>
+							<li></li>
+							<li></li>
+						</ul>
 					</section>
 					<section>
 						<h3>Questions ?</h3>
