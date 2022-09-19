@@ -22,7 +22,7 @@
 							alt="Qwik logo"
 							style="width: 400px; height: 400px"
 						/>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Welcome, ice breaker etc...</li>
 								<li>Qui a déjà entendu parler de Qwik ?</li>
@@ -49,15 +49,15 @@
 										<li>Créé par Misko Hevery</li>
 										<li>Open-sourced fin 2021</li>
 										<li class="fragment">Backé par builder.io</li>
-										<li class="fragment">HTML First, "zero JS"</li>
 										<li class="fragment">https://qwik.builder.io</li>
 									</ul>
 								</td>
 							</tr>
 						</table>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Misko créateur d'angularJS, co-créateur d'angular 2</li>
+								<li>Sorti en béta finale le 19 septembre 2022</li>
 								<li>Builder.io: (Partytown / Mitosis / Figma&lt;-&gt;HTML)</li>
 								<li>Co créateurs de Stencil (Manu almeida / Adam bradley)</li>
 							</ul>
@@ -65,16 +65,24 @@
 					</section>
 					<section>
 						<h3>Qwik, une promesse</h3>
-						<img /><!-- TODO image lighthouse 100% perf -->
+						<img
+							src="/assets/lighthouse-100.webp"
+							style="width: 500px"
+							alt="performance score"
+						/>
 						<ul>
 							<li>Temps de chargement &lt; 1s</li>
 							<li>Pas d'Hydratation</li>
-							<li>Moins de 1k de js</li>
+							<li>HTML First, "zero JS"</li>
 							<li>Time to Interactive de folie</li>
 						</ul>
-						<aside class="notes">
-							Qwik nous promet des performances folle car très peu de JS On va
-							donc voir comment ça marche et pourquoi. Générique.
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>En vrai c'est plutôt moins d'1k de JS</li>
+								<li>Qwik nous promet des performances folle car très peu de JS</li>
+								<li>On va donc voir comment ça marche et pourquoi.</li>
+								<li>Générique.</li>
+							</ul>
 						</aside>
 					</section>
 				</section>
@@ -95,7 +103,6 @@
 									<li>Tech lead @ Onepoint</li>
 									<li>Angular fanboy</li>
 									<li>Typescript addict</li>
-									<li>Musicien (@bendubik)</li>
 									<li>@benjilegnard</li>
 								</ul>
 							</td>
@@ -104,9 +111,47 @@
 				</section>
 				<section>
 					<section>
+						<h3>Savoir d'où l'on vient</h3>
+						<table>
+							<thead>
+								<tr>
+									<th>1st gen</th>
+									<th>2nd gen</th>
+									<th>3rd gen</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									Qwik fait partie de ce qu'on peut appeler une 4e génération de
+									frameworks JS
+								</li>
+								<li>
+									gen 1 : ruby / PHP + jquery / JS uniquement pour certains
+									éléments.
+								</li>
+								<li>
+									gen 2 : shift mental sur les single page application,
+									backbone, angular, react, svelte, etc...
+								</li>
+								<li>
+									gen 3 : resumable frameworks + islands, fresh, astro.build
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
 						<h3>SPA, Single Page Application</h3>
 						<!-- TODO, maybe google trend graphs -->
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Historiquement page -> server</li>
 								<li>Certaines app déjà dans les années 1990</li>
@@ -121,7 +166,7 @@
 							<li>Client Side Rendering</li>
 							<li>Component-based</li>
 						</ul>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>rendre la donnée,</li>
 								<li>template HTML,</li>
@@ -142,7 +187,7 @@
 								<td></td>
 							</tr>
 						</table>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>On dépends énormément du JS à cause du CSR</li>
 								<li>Tant qu'on a pas tout le JS</li>
@@ -159,7 +204,7 @@
 							<li><b>FID/TTI</b>: interactivité</li>
 							<li><b>CLS</b>: stabilité visuelle</li>
 						</ul>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							<p>Depuis 2020, pris en compte par le pagerank google</p>
 							<ul>
 								<li>Largest Contenful Paint: rapidité d'affichage</li>
@@ -181,7 +226,7 @@
 								Nouveau problème: réconcilier serveur et client
 							</li>
 						</ul>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Utiliser le même framework SPA coté serveur</li>
 								<li></li>
@@ -190,7 +235,7 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Frameworks SPA</h3>
+						<h3>Frameworks SPA & their SSR solutions</h3>
 						<table>
 							<thead>
 								<tr>
@@ -215,17 +260,9 @@
 								<td>Fastboost</td>
 							</tr>
 						</table>
-						<aside class="notes">J'ai mis Ember pour troller</aside>
-					</section>
-					<section>
-						<h3>Principe du SSR</h3>
-						<ul>
-							<li>à chaque request de page</li>
-							<li>renderToString()</li>
-							<li>event listener coté back ?</li>
-						</ul>
-						<aside class="notes">
-							Incroyable non ? warning fuite mémoire. Maintenant qu'on a vu tout
+						<aside class="notes" aria-label="Notes">
+							J'ai mis Ember pour troller Tout ces frameworks ont le même
+							problème : la réhydratation.
 						</aside>
 					</section>
 				</section>
@@ -249,8 +286,12 @@
 						</ul>
 					</section>
 					<section>
-						<h2>Hydratation vs résumabilité</h2>
+						<h2><u>Hydratation</u> vs résumabilité</h2>
 						<img src="/assets/hydrate-vs-resume.drawio.svg" />
+					</section>
+					<section>
+						<h2>Hydratation vs <u>résumabilité</u></h2>
+						<img src="/assets/resume.drawio.svg" />
 					</section>
 					<section>
 						<h2>La résumabilité</h2>
@@ -259,6 +300,7 @@
 							<li class="fragment">
 								Les écouteurs d'évènement sont "sérializés"
 							</li>
+							<li>Pas de téléchargement de JS, on est déjà prêt.</li>
 							<li>
 								<pre>
 									<code class="fragment hljs" data-trim>
@@ -272,7 +314,7 @@
 					</section>
 				</section>
 				<!--
-					CODE DETAILS
+					INTERNALS OF THE FRAMEWORK
 				-->
 				<section>
 					<section>
@@ -296,7 +338,7 @@
 								</script>
 							</code>
 						</pre>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							Qwikloader is: small: 1 kb minified. fast: 5ms delivered inline in
 							the dom GOAL:
 							<ul>
@@ -308,6 +350,62 @@
 								<li>Lazy-load the event handler and execute it.</li>
 							</ul>
 						</aside>
+					</section>
+					<section>
+						<h3>Automagic bundle splitting / $</h3>
+						<pre>
+							<code class="hljs language-typescript" language="typescript" data-trim data-id="code-animation">
+								<script type="text/template">
+									export const Counter = component$(() => {
+										const state = useStore({
+											count: 0,
+										});
+										return (
+											<Host>
+												<div>Value is: ${state.count}</div>
+												<button onClick$={() => state.count++}>Increment</button>
+											</Host>
+										);
+									});
+								</script>
+							</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									Qwik s'occupe tout seul de découper votre code en chunk js.
+								</li>
+								<li>
+									Ici on va se retrouver avec trois chunk.
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>The optimizer</h2>
+						<ul>
+							<li>Basé sur [Vite](https://vitejs.dev/)</li>
+							<li>esbuild</li>
+							<li>knows about your code</li>
+						</ul>
+					</section>
+					<!-- TODO more slide on the optimizer -->
+					<section>
+						<h2>Serialisation</h2>
+						<p>q:obj</p>
+					</section>
+					<!-- TODO more slide on serialization -->
+				</section>
+				<!--
+					Features deep dive
+				-->
+				<section>
+					<section>
+						<h2>Features</h2>
+						<ul>
+							<li>Aventurons nous plus loin</li>
+							<li>Dans la jungle des fonctionnalités</li>
+						</ul>
 					</section>
 					<section>
 						<h3>Component / $syntax</h3>
@@ -328,7 +426,7 @@
 								</script>
 							</code>
 						</pre>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							Qwik est component-based, sur du JSX JSX => mélanger du XML dans
 							du JS. - très proche de React dans l'idée
 						</aside>
@@ -390,47 +488,28 @@
 							<li>styles scopés aux composants</li>
 						</ul>
 					</section>
-				</section>
-				<!--
-					INTERNALS OF THE FRAMEWORK
-				-->
-				<section>
 					<section>
-						<h2>The optimizer</h2>
-						<ul>
-							<li>Basé sur [Vite](https://vitejs.dev/)</li>
-							<li>Plugin Vite</li>
-						</ul>
-					</section>
-					<!-- TODO more slide on the optimizer -->
-				</section>
-				<section>
-					<section>
-						<h2>Serialisation</h2>
-						<p>q:obj</p>
-					</section>
-					<!-- TODO more slide on serialization -->
-				</section>
-				<section>
-					<section>
-						<h2>Client / Server</h2>
-						<ul>
-							<li>api fetch()</li>
-							<li>node-fetch polyfill</li>
-						</ul>
-						<aside class="notes">OK</aside>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Scoped styles</h2>
+						<h2>Feature: Scoped styles</h2>
 						<ul>
 							<li>useStyles()</li>
 							<li>contextualisés par composant</li>
 						</ul>
-						<aside class="notes">
+						<aside class="notes" aria-label="Notes">
 							à noter principalement que Qwik fournit une solution native de
-							CSS-in-JS
+							CSS-in-JS Pas besoin d'en rajouter une, pas de question à se
+							poser, c'est géré par le build
+						</aside>
+					</section>
+					<section>
+						<h2>Feature: Client / Server</h2>
+						<ul>
+							<li>api fetch()</li>
+							<li>node-fetch polyfill</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>OK</li>
+							</ul>
 						</aside>
 					</section>
 				</section>
@@ -442,8 +521,12 @@
 							<li>Meta-framework</li>
 							<li>page based routing (MDX)</li>
 						</ul>
+						<aside class="notes" aria-label="Notes">
+							Comme React => library d'affichage only Qwik city => super powers.
+						</aside>
 					</section>
 					<section>
+						<h3>Page-based routing</h3>
 						<!-- todo explain page based routing-->
 						<pre>
 							| index.mdx
@@ -451,6 +534,11 @@
 							| -> /user/[id].mdx
 						</pre
 						>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>OK</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>&lt;head&gt; management</h3>
@@ -460,6 +548,11 @@
 				<section>
 					<section>
 						<h2>Conclusion</h2>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>OK</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Feature comparution matrix</h3>
@@ -469,15 +562,28 @@
 						<ul>
 							<li>Fresh (deno)</li>
 							<li>Marko</li>
+							<li>Astro .build</li>
 						</ul>
 					</section>
 					<section>
-						<h3>How do i ?</h3>
+						<h3>How do i use it on my project?</h3>
 						<ul>
 							<li>qwikify</li>
 							<li></li>
 							<li></li>
 						</ul>
+					</section>
+					<section>
+						<h3>Perf</h3>
+						<!-- TODO meme of the buses -->
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Description: C'est un petit bus sur lequel est marqué</li>
+								<li>
+									La performance, comme l'accessibilité, c'est l'affaire de tous
+								</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Questions ?</h3>
