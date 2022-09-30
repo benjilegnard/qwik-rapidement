@@ -18,3 +18,9 @@ Source code for my talk on [Qwik](http://qwik.builder.io)
 
     npm ci
     npx vite
+
+# todo:
+
+- réduire intro, fusionner bubbling et qwik loader
+- réduire features
+- 

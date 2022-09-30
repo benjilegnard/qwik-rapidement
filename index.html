@@ -126,16 +126,10 @@
 								<tr>
 									<td>
 										<ul>
-											<li>
-											jquery
-										</li>
-											<li>
-											PHP
-										</li>
-										<li>
-											Scriptaculous
-										</li>
-									</ul>
+											<li>jquery</li>
+											<li>PHP</li>
+											<li>Scriptaculous</li>
+										</ul>
 									</td>
 									<td>
 										<ul>
@@ -206,12 +200,36 @@
 						<!-- todo loading wheel + page vide -->
 						<table role="presentation">
 							<tr>
-								<td></td>
-								<td></td>
+								<td>
+									<img
+										src="/assets/loaders/loader-gmail.png"
+										alt="Loader for gmail"
+										style="width: 400px"
+									/>
+								</td>
+								<td>
+									<img
+										src="/assets/loaders/loader-linkedin.png"
+										alt="Loader for linkedin"
+										style="width: 400px"
+									/>
+								</td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>
+									<img
+										src="/assets/loaders/loader-twitter.png"
+										alt="Loader for twitter"
+										style="width: 400px"
+									/>
+								</td>
+								<td>
+									<img
+										src="/assets/loaders/loader-youtube.png"
+										alt="Loader for youtube"
+										style="width: 400px"
+									/>
+								</td>
 							</tr>
 						</table>
 						<aside class="notes" aria-label="Notes">
@@ -243,14 +261,11 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Une solution</h3>
+						<h3>Une solution ?</h3>
 						<ul>
 							<li class="fragment">Server-Side-Rendering</li>
 							<li class="fragment">
 								Javascript IsoMorphe / Universal (node.js)
-							</li>
-							<li class="fragment">
-								Nouveau problème: réconcilier serveur et client
 							</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
@@ -262,7 +277,7 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Frameworks SPA & their SSR solutions</h3>
+						<h3>Frameworks SPA + SSR</h3>
 						<table>
 							<thead>
 								<tr>
@@ -308,7 +323,7 @@
 								listener
 							</li>
 							<li class="fragment">
-								on dépends toujours du JS => Time to interactive pas bon
+								On dépends toujours du JS => Time to interactive pas bon
 							</li>
 						</ul>
 					</section>
@@ -327,16 +342,10 @@
 							<li class="fragment">
 								Les écouteurs d'évènement sont "sérializés"
 							</li>
-							<li>Pas de téléchargement de JS, on est déjà prêt.</li>
-							<li>
-								<pre>
-									<code class="fragment hljs" data-trim>
-										<script type="text/template">
-											<button onClickQrl="./chunk.js#handler_symbol">click me</button>
-										</script>
-									</code>
-								</pre>
+							<li class="fragment">
+								Pas de téléchargement de JS, on est déjà prêt.
 							</li>
+							<li class="fragment">L'état des composant est sérialisé</li>
 						</ul>
 					</section>
 				</section>
@@ -345,10 +354,13 @@
 				-->
 				<section>
 					<section>
-						<h3>Qwik: Principes de base</h3>
+						<h3>Qwik: les features</h3>
 						<ul>
-							<li>Retarder le plus possible l'exécution du JS</li>
-							<li>Sérialiser le plus de choses dans le DOM</li>
+							<li class="fragment">
+								Retarder le plus possible l'exécution du JS
+							</li>
+							<li class="fragment">Automatic bundle-splitting</li>
+							<li class="fragment">Sérialiser le plus de choses dans le DOM</li>
 						</ul>
 					</section>
 					<section data-auto-animate>
@@ -380,7 +392,10 @@
 					</section>
 					<section>
 						<h3 data-id="code-title">QwikLoader: Event bubbling</h3>
-						<!-- TODO: image ? -->
+						<img
+							src="/assets/event-bubbling.drawio.svg"
+							alt="visual representation"
+						/>
 					</section>
 					<section>
 						<h2>The optimizer</h2>
@@ -413,46 +428,29 @@
 					</section>
 					<section>
 						<h4>Optimizer: What you get</h4>
-						<ul>
-							<li>
-								<pre><code>const Counter = component(qrl('./chunk-a.js', 'Counter_onMount'));</code></pre>
-							</li>
-							<li>
-								<pre>chunk-a.js</pre>
-								<pre>
-									<code class="hljs language-typescript" data-trim>
-										<script type="text/template">
-										export const Counter_onMount = () => {
-											const store = useStore({ count: 0 });
-											return <button onClick$={qrl(''./chunk-b.js', 'Counter_onClick', [store])}>{store.count}</button>;
-										};
-										</script>
-									</code>
-								</pre>
-							</li>
-							<li>
-								<pre>chunk-b.js</pre>
-								<pre><code>
+
+						<pre><code>const Counter = component(qrl('./chunk-a.js', 'Counter_onMount'));</code></pre>
+						<pre>chunk-a.js</pre>
+						<pre>
+							<code class="hljs language-typescript" data-trim>
+								<script type="text/template">
+								export const Counter_onMount = () => {
+									const store = useStore({ count: 0 });
+									return <button onClick$={qrl(''./chunk-b.js', 'Counter_onClick', [store])}>{store.count}</button>;
+								};
+								</script>
+							</code>
+						</pre>
+						<pre>chunk-b.js</pre>
+						<pre>
+							<code class="hljs language-typescript" data-trim>
+								<script type="text/template">
 									const Counter_onClick = () => {
 										const [store] = useLexicalScope();
 										return store.count++;
 									};
-								</code></pre>
-							</li>
-						</ul>
-					</section>
-					<section>
-						<h3></h3>
-						<pre>
-							<!-- todo show slot example -->
-						<code class="hljs language-typescript" data-trim>
-							<script type="text/template">
-								const Counter = component$(() => {
-									const store = useStore({ count: 0 });
-									return <button onClick$={() => store.count++}>{store.count}</button>;
-								});
-							</script>
-						</code>
+								</script>
+							</code>
 						</pre>
 					</section>
 					<!-- TODO more slide on the optimizer -->
@@ -468,10 +466,31 @@
 						</code>
 					</section>
 					<section>
-						<h2>Serialisation</h2>
-						<p>Closures state</p>
+						<h3>Serialization: closure</h3>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const Counter = component$(() => {
+									const store = useStore({ count: 0 });
+									return <button onClick$={() => store.count++}>{store.count}</button>;
+								});
+							</script>
+						</code>
+						</pre>
+						<pre>
+							<code class="hljs language-typescript" data-trim>
+								<script type="text/template">
+									<counter q:obj="0"></counter>
+								</script>
+							</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Souvent on utilise JSON</li>
+								<li>limitation : dates, closures,</li>
+							</ul>
+						</aside>
 					</section>
-					<!-- TODO more slide on serialization -->
 				</section>
 				<!--
 					Features deep dive
@@ -574,8 +593,8 @@
 					<section>
 						<h3>Feature: hooks / useState</h3>
 						<ul>
-							<li>useState</li>
-							<li>useContext</li>
+							<li class="fragment">useState</li>
+							<li class="fragment">useContext</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
@@ -586,10 +605,10 @@
 					<section>
 						<h3>Feature: lifecycle</h3>
 						<ul>
-							<li>useMount$</li>
-							<li>useServerMount$</li>
-							<li>useWatch$</li>
-							<li>useClientEffect$</li>
+							<li class="fragment">useMount$</li>
+							<li class="fragment">useServerMount$</li>
+							<li class="fragment">useWatch$</li>
+							<li class="fragment">useClientEffect$</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
@@ -602,48 +621,6 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Feature: async rendering</h3>
-						<pre>
-							<!-- todo show slot example -->
-						<code class="hljs language-typescript" data-trim>
-							<script type="text/template">
-								export function AsyncComp() {
-									const data 
-									return (
-										<>
-										<div>
-											Value is: ${count}
-										</div>
-										<button onClick$={() => setCount(count + 1)}>
-											Increment
-										</button>
-										</>
-									)
-								}
-							</script>
-						</code>
-						</pre>
-					</section>
-					<section>
-						<h2>Feature: Scoped styles</h2>
-						<ul>
-							<li>
-								<pre>useStyleScoped$()</pre>
-								- creates a scoped style
-							</li>
-
-							<li>
-								<pre>useStyle$()</pre>
-								- creates a global style
-							</li>
-						</ul>
-						<aside class="notes" aria-label="Notes">
-							à noter principalement que Qwik fournit une solution native de
-							CSS-in-JS Pas besoin d'en rajouter une, pas de question à se
-							poser, c'est géré par le build
-						</aside>
-					</section>
-					<section>
 						<h2>Feature: Client / Server</h2>
 						<ul>
 							<li>api fetch()</li>
@@ -652,6 +629,58 @@
 						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>OK</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Feature: Scoped styles</h2>
+						<ul>
+							<li><b>useStyleScoped$()</b> : creates a scoped style</li>
+							<li><b>useStyle$()</b> : creates a global style</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							à noter principalement que Qwik fournit une solution native de
+							CSS-in-JS Pas besoin d'en rajouter une, pas de question à se
+							poser, c'est géré par le build
+						</aside>
+					</section>
+					<section>
+						<h3>Feature: async rendering</h3>
+						<p>HTTP Streaming</p>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								export async function AsyncComp() {
+									const data = await fetch('url');
+									return (
+										<>${data}</>
+									)
+								}
+							</script>
+						</code>
+						</pre>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								export function AllAsync() {
+									return (
+										<SSRStream>
+											<AsyncComp/>
+											<AsyncComp/>
+											<AsyncComp/>
+										</SSRStream>
+									)
+								}
+							</script>
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Features: arrêtons nous là</h3>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Bon ok on a vu tout ça mais c'est une lib comme react</li>
+								<li>Il manque de quoi en faire un framework</li>
 							</ul>
 						</aside>
 					</section>
@@ -735,10 +764,20 @@
 				<section>
 					<section>
 						<h2>Conclusion</h2>
+						<ul>
+							<li>Espèrons que ça soit le futur des frameworks JS</li>
+							<li>Features manquantes encore:</li>
+							<li>Manque un bootstrap / MUI</li>
+						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
-								<li>On a vu: comment qwik fonctionne et un survol de son API</li>
-								<li>Manque encore : comment faire de l'i18n, encore en discussion</li>
+								<li>
+									On a vu: comment qwik fonctionne et un survol de son API.
+									Comment
+								</li>
+								<li>
+									Manque encore : comment faire de l'i18n, encore en discussion
+								</li>
 							</ul>
 						</aside>
 					</section>
@@ -770,8 +809,13 @@
 						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Description: C'est un petit bus sur lequel est marqué</li>
-								<li>Server side rendering, bundle splitting, tree shaking, optimizing compilers, no-js frameworks</li>
-								<li>Et un gros train marqué GOOGLE TAG MANAGER qui le dégomme</li>
+								<li>
+									Server side rendering, bundle splitting, tree shaking,
+									optimizing compilers, no-js frameworks
+								</li>
+								<li>
+									Et un gros train marqué GOOGLE TAG MANAGER qui le dégomme
+								</li>
 								<li>
 									La performance, comme l'accessibilité, c'est l'affaire de tous
 								</li>
