@@ -79,7 +79,9 @@
 						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>En vrai c'est plutôt moins d'1k de JS</li>
-								<li>Qwik nous promet des performances folle car très peu de JS</li>
+								<li>
+									Qwik nous promet des performances folle car très peu de JS
+								</li>
 								<li>On va donc voir comment ça marche et pourquoi.</li>
 								<li>Générique.</li>
 							</ul>
@@ -122,9 +124,34 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>
+										<ul>
+											<li>
+											jquery
+										</li>
+											<li>
+											PHP
+										</li>
+										<li>
+											Scriptaculous
+										</li>
+									</ul>
+									</td>
+									<td>
+										<ul>
+											<li>Backbone</li>
+											<li>AngularJS</li>
+											<li>Knockout</li>
+										</ul>
+									</td>
+									<td>
+										<ul>
+											<li>Next</li>
+											<li>Angular/universal</li>
+											<li>Nuxt</li>
+											<li>Sveltekit</li>
+										</ul>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -352,34 +379,8 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Automagic bundle splitting / $</h3>
-						<pre>
-							<code class="hljs language-typescript" language="typescript" data-trim data-id="code-animation">
-								<script type="text/template">
-									export const Counter = component$(() => {
-										const state = useStore({
-											count: 0,
-										});
-										return (
-											<Host>
-												<div>Value is: ${state.count}</div>
-												<button onClick$={() => state.count++}>Increment</button>
-											</Host>
-										);
-									});
-								</script>
-							</code>
-						</pre>
-						<aside class="notes" aria-label="Notes">
-							<ul>
-								<li>
-									Qwik s'occupe tout seul de découper votre code en chunk js.
-								</li>
-								<li>
-									Ici on va se retrouver avec trois chunk.
-								</li>
-							</ul>
-						</aside>
+						<h3 data-id="code-title">QwikLoader: Event bubbling</h3>
+						<!-- TODO: image ? -->
 					</section>
 					<section>
 						<h2>The optimizer</h2>
@@ -389,10 +390,86 @@
 							<li>knows about your code</li>
 						</ul>
 					</section>
+					<section>
+						<h4>Optimizer: What you write : $</h4>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const Counter = component$(() => {
+									const store = useStore({ count: 0 });
+									return <button onClick$={() => store.count++}>{store.count}</button>;
+								});
+							</script>
+						</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									Qwik s'occupe tout seul de découper votre code en chunk js.
+								</li>
+								<li>Ici on va se retrouver avec trois chunk.</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>Optimizer: What you get</h4>
+						<ul>
+							<li>
+								<pre><code>const Counter = component(qrl('./chunk-a.js', 'Counter_onMount'));</code></pre>
+							</li>
+							<li>
+								<pre>chunk-a.js</pre>
+								<pre>
+									<code class="hljs language-typescript" data-trim>
+										<script type="text/template">
+										export const Counter_onMount = () => {
+											const store = useStore({ count: 0 });
+											return <button onClick$={qrl(''./chunk-b.js', 'Counter_onClick', [store])}>{store.count}</button>;
+										};
+										</script>
+									</code>
+								</pre>
+							</li>
+							<li>
+								<pre>chunk-b.js</pre>
+								<pre><code>
+									const Counter_onClick = () => {
+										const [store] = useLexicalScope();
+										return store.count++;
+									};
+								</code></pre>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h3></h3>
+						<pre>
+							<!-- todo show slot example -->
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const Counter = component$(() => {
+									const store = useStore({ count: 0 });
+									return <button onClick$={() => store.count++}>{store.count}</button>;
+								});
+							</script>
+						</code>
+						</pre>
+					</section>
 					<!-- TODO more slide on the optimizer -->
 					<section>
 						<h2>Serialisation</h2>
-						<p>q:obj</p>
+						<p>Events Listener / QRL</p>
+						<code class="hljs language-html" data-trim>
+							<script type="text/template">
+								<div>
+									<button on:click="./chunk-a.js#Counter_button_onClick[0]">0</button>
+								</div>
+							</script>
+						</code>
+					</section>
+					<section>
+						<h2>Serialisation</h2>
+						<p>Closures state</p>
 					</section>
 					<!-- TODO more slide on serialization -->
 				</section>
@@ -459,8 +536,79 @@
 							<!-- todo show slot example -->
 						<code class="hljs language-typescript" data-trim>
 							<script type="text/template">
-								export function Counter() {
-									const [count, setCount] = useState(0);
+								const Collapsible = component$(() => {
+									const store = useStore({ isOpen: true });
+
+									return (
+										<div class="collapsible">
+										<div class="title" onClick$={() => (store.isOpen = !store.isOpen)}>
+											<Slot name="title"></Slot>
+										</div>
+										{store.isOpen ? <Slot /> : null}
+										</div>
+									);
+								});
+							</script>
+						</code>
+						</pre>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const MyApp = component$(() => {
+									return (
+										<Collapsible>
+										<span q:slot="title">Title text</span>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vulputate accumsan pretium.
+										</Collapsible>
+									);
+								});
+							</script>
+						</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Content projection</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Feature: hooks / useState</h3>
+						<ul>
+							<li>useState</li>
+							<li>useContext</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Même concept qu'en react</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Feature: lifecycle</h3>
+						<ul>
+							<li>useMount$</li>
+							<li>useServerMount$</li>
+							<li>useWatch$</li>
+							<li>useClientEffect$</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									useServerMount$() registers a server-mounted hook that only
+									runs on the server when the component is first mounted.
+								</li>
+								<li>useMount$: onInit, exécuté à la création du composant.</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Feature: async rendering</h3>
+						<pre>
+							<!-- todo show slot example -->
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								export function AsyncComp() {
+									const data 
 									return (
 										<>
 										<div>
@@ -477,22 +625,17 @@
 						</pre>
 					</section>
 					<section>
-						<h3>Feature: hooks / useState</h3>
-						<ul>
-							<li>styles scopés aux composants</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Feature: async rendering</h3>
-						<ul>
-							<li>styles scopés aux composants</li>
-						</ul>
-					</section>
-					<section>
 						<h2>Feature: Scoped styles</h2>
 						<ul>
-							<li>useStyles()</li>
-							<li>contextualisés par composant</li>
+							<li>
+								<pre>useStyleScoped$()</pre>
+								- creates a scoped style
+							</li>
+
+							<li>
+								<pre>useStyle$()</pre>
+								- creates a global style
+							</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							à noter principalement que Qwik fournit une solution native de
@@ -529,20 +672,64 @@
 						<h3>Page-based routing</h3>
 						<!-- todo explain page based routing-->
 						<pre>
+						<code class="hljs" data-trim>
+							<script type="text/template">
 							| index.mdx
-							| -> /product/[slug].mdx
-							| -> /user/[id].mdx
-						</pre
-						>
+							| -> /product/[slug]/index.mdx
+							| -> /user/[id]/index.mdx
+							</script>
+							</code>
+						</pre>
+						<ul>
+							<li>
+								<pre>useLocation$</pre>
+							</li>
+						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
-								<li>OK</li>
+								<li>On récupère un object location avec paths et params</li>
 							</ul>
 						</aside>
 					</section>
 					<section>
+						<h3>MDX</h3>
+						<pre>
+							<!-- todo show slot example -->
+						<code class="hljs language-markdown" data-trim>
+							<script type="text/template">
+								---
+								# File: src/routes/some/path/index.mdx
+								title: Hello World Title
+								---
+								import { Counter } from "../../../components/counter/counter";
+
+								This is a simple hello world component.
+
+								<Counter />
+							</script>
+						</code>
+						</pre>
+					</section>
+					<section>
 						<h3>&lt;head&gt; management</h3>
-						<!-- todo explain head-->
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								// File: src/routes/product/[skuId]/index.tss
+								import { component$ } from '@builder.io/qwik';
+								import type { DocumentHead } from '@builder.io/qwik-city';
+
+								export default component$(() => {...});
+
+								export const head: DocumentHead = {
+									title: 'Product Details',
+									meta: [...],
+									links: [...],
+									styles: [...],
+								};
+							</script>
+						</code>
+						</pre>
 					</section>
 				</section>
 				<section>
@@ -550,12 +737,10 @@
 						<h2>Conclusion</h2>
 						<aside class="notes" aria-label="Notes">
 							<ul>
-								<li>OK</li>
+								<li>On a vu: comment qwik fonctionne et un survol de son API</li>
+								<li>Manque encore : comment faire de l'i18n, encore en discussion</li>
 							</ul>
 						</aside>
-					</section>
-					<section>
-						<h3>Feature comparution matrix</h3>
 					</section>
 					<section>
 						<h2>Go further / other solutions</h2>
@@ -566,19 +751,27 @@
 						</ul>
 					</section>
 					<section>
-						<h3>How do i use it on my project?</h3>
+						<h3>How do i use it on my project ?</h3>
 						<ul>
-							<li>qwikify</li>
-							<li></li>
+							<li><pre>import { qwikify$ } from 'qwik-react';</pre></li>
+							<li>qwikify$(ReactComponent)</li>
 							<li></li>
 						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Pas donné à tout le monde de refaire son front</li>
+								<li></li>
+							</ul>
+						</aside>
 					</section>
 					<section>
-						<h3>Perf</h3>
-						<!-- TODO meme of the buses -->
+						<h3>Performance</h3>
+						<img src="/assets/bus-meme.jpeg" alt="image of a bus marqued " />
 						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Description: C'est un petit bus sur lequel est marqué</li>
+								<li>Server side rendering, bundle splitting, tree shaking, optimizing compilers, no-js frameworks</li>
+								<li>Et un gros train marqué GOOGLE TAG MANAGER qui le dégomme</li>
 								<li>
 									La performance, comme l'accessibilité, c'est l'affaire de tous
 								</li>
