@@ -71,10 +71,10 @@
 							alt="performance score"
 						/>
 						<ul>
-							<li>Temps de chargement &lt; 1s</li>
-							<li>Pas d'Hydratation</li>
-							<li>HTML First, "zero JS"</li>
-							<li>Time to Interactive de folie</li>
+							<li class="fragment">Temps de chargement &lt; 1s</li>
+							<li class="fragment">Pas d'Hydratation</li>
+							<li class="fragment">HTML First, "zero JS"</li>
+							<li class="fragment">Time to Interactive de folie</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
@@ -102,7 +102,7 @@
 							</td>
 							<td>
 								<ul>
-									<li>Tech lead @ Onepoint</li>
+									<li>Tech lead @ onepoint</li>
 									<li>Angular fanboy</li>
 									<li>Typescript addict</li>
 									<li>@benjilegnard</li>
@@ -124,24 +124,28 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>
+									<td class="fragment">
 										<ul>
 											<li>jquery</li>
+											<li>scriptaculous</li>
 											<li>PHP</li>
-											<li>Scriptaculous</li>
+											<li>Java/JSP</li>
+											<li>HTTP/HTML</li>
 										</ul>
 									</td>
-									<td>
+									<td class="fragment">
 										<ul>
 											<li>Backbone</li>
-											<li>AngularJS</li>
+											<li>Angular</li>
 											<li>Knockout</li>
+											<li>React</li>
+											<li>Vue</li>
 										</ul>
 									</td>
-									<td>
+									<td class="fragment">
 										<ul>
-											<li>Next</li>
-											<li>Angular/universal</li>
+											<li>Next.js</li>
+											<li>@nguniversal</li>
 											<li>Nuxt</li>
 											<li>Sveltekit</li>
 										</ul>
@@ -252,7 +256,7 @@
 						<aside class="notes" aria-label="Notes">
 							<p>Depuis 2020, pris en compte par le pagerank google</p>
 							<ul>
-								<li>Largest Contenful Paint: rapidité d'affichage</li>
+								<li>Largest Contentful Paint: rapidité d'affichage</li>
 								<li>
 									First input delay/TTI: rapidité de chargement / utilisabilité
 								</li>
@@ -267,15 +271,21 @@
 							<li class="fragment">
 								Javascript IsoMorphe / Universal (node.js)
 							</li>
+							<li class="fragment">Mais: Nouveau problème</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
+								<li>Gen 3</li>
 								<li>Utiliser le même framework SPA coté serveur</li>
+								<li>
+									React -> Next, Vue -> Nuxt, Svelte -> SvelteKit, Angular -> nguniversal,
+								</li>
+								<li>Re-connecter les deux mondes</li>
 								<li></li>
-								<li>Re-connecter les deux</li>
 							</ul>
 						</aside>
 					</section>
+					<!--
 					<section>
 						<h3>Frameworks SPA + SSR</h3>
 						<table>
@@ -306,7 +316,7 @@
 							J'ai mis Ember pour troller Tout ces frameworks ont le même
 							problème : la réhydratation.
 						</aside>
-					</section>
+					</section>-->
 				</section>
 				<section>
 					<section>
@@ -325,6 +335,7 @@
 							<li class="fragment">
 								On dépends toujours du JS => Time to interactive pas bon
 							</li>
+							<li class="fragment">Double exécution du code</li>
 						</ul>
 					</section>
 					<section>
@@ -339,13 +350,15 @@
 						<h2>La résumabilité</h2>
 						<!-- TODO https://qwik.builder.io/docs/concepts/resumable -->
 						<ul>
+
+							<li class="fragment">Restart vs <u>Pause</u></li>
 							<li class="fragment">
 								Les écouteurs d'évènement sont "sérializés"
 							</li>
-							<li class="fragment">
-								Pas de téléchargement de JS, on est déjà prêt.
-							</li>
 							<li class="fragment">L'état des composant est sérialisé</li>
+							<li class="fragment">
+								Pas de téléchargement de JS quand pas besoin, on est déjà prêt.
+							</li>
 						</ul>
 					</section>
 				</section>
@@ -355,13 +368,6 @@
 				<section>
 					<section>
 						<h3>Qwik: les features</h3>
-						<ul>
-							<li class="fragment">
-								Retarder le plus possible l'exécution du JS
-							</li>
-							<li class="fragment">Automatic bundle-splitting</li>
-							<li class="fragment">Sérialiser le plus de choses dans le DOM</li>
-						</ul>
 					</section>
 					<section data-auto-animate>
 						<h3 data-id="code-title">le QwikLoader</h3>
@@ -377,6 +383,10 @@
 								</script>
 							</code>
 						</pre>
+						<img class="fragment"
+							src="/assets/event-bubbling.drawio.svg"
+							alt="visual representation"
+						/>
 						<aside class="notes" aria-label="Notes">
 							Qwikloader is: small: 1 kb minified. fast: 5ms delivered inline in
 							the dom GOAL:
@@ -391,19 +401,15 @@
 						</aside>
 					</section>
 					<section>
-						<h3 data-id="code-title">QwikLoader: Event bubbling</h3>
-						<img
-							src="/assets/event-bubbling.drawio.svg"
-							alt="visual representation"
-						/>
-					</section>
-					<section>
 						<h2>The optimizer</h2>
 						<ul>
-							<li>Basé sur [Vite](https://vitejs.dev/)</li>
-							<li>esbuild</li>
-							<li>knows about your code</li>
+							<li>Plugin Vite ( https://vitejs.dev/ )</li>
+							<li class="fragment">esbuild + rollup</li>
+							<li class="fragment">knows about your code</li>
 						</ul>
+						<aside class="notes" aria-label="Notes">
+							Qwik n'est pas uniquement responsable du runtime, mais aussi du buildtime
+						</aside>
 					</section>
 					<section>
 						<h4>Optimizer: What you write : $</h4>
@@ -457,13 +463,15 @@
 					<section>
 						<h2>Serialisation</h2>
 						<p>Events Listener / QRL</p>
-						<code class="hljs language-html" data-trim>
-							<script type="text/template">
-								<div>
-									<button on:click="./chunk-a.js#Counter_button_onClick[0]">0</button>
-								</div>
-							</script>
-						</code>
+						<pre data-id="code-animation">
+							<code class="hljs language-html" data-trim>
+								<script type="text/template">
+									<div>
+										<button on:click="./chunk-a.js#Counter_button_onClick[0]">0</button>
+									</div>
+								</script>
+							</code>
+						</pre>
 					</section>
 					<section>
 						<h3>Serialization: closure</h3>
@@ -477,10 +485,17 @@
 							</script>
 						</code>
 						</pre>
-						<pre>
-							<code class="hljs language-typescript" data-trim>
+						<pre data-id="code-animation" class="fragment">
+							<code class="hljs" language="html" data-trim>
 								<script type="text/template">
-									<counter q:obj="0"></counter>
+									<html>
+									<body q:base="/build/">
+										<button q:obj="456, 123" on:click="./chunk-c.js#Counter_onClick[0,1]">0</button>
+										<script type="qwik/json">
+										{...json...}
+										<script>
+									</body>
+									</html>
 								</script>
 							</code>
 						</pre>
@@ -591,9 +606,9 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Feature: hooks / useState</h3>
+						<h3>Feature: hooks</h3>
 						<ul>
-							<li class="fragment">useState</li>
+							<li class="fragment">useStore</li>
 							<li class="fragment">useContext</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
@@ -620,6 +635,7 @@
 							</ul>
 						</aside>
 					</section>
+					<!--
 					<section>
 						<h2>Feature: Client / Server</h2>
 						<ul>
@@ -632,6 +648,7 @@
 							</ul>
 						</aside>
 					</section>
+				    -->
 					<section>
 						<h2>Feature: Scoped styles</h2>
 						<ul>
@@ -644,6 +661,7 @@
 							poser, c'est géré par le build
 						</aside>
 					</section>
+					<!--
 					<section>
 						<h3>Feature: async rendering</h3>
 						<p>HTTP Streaming</p>
@@ -675,8 +693,15 @@
 						</code>
 						</pre>
 					</section>
+				-->
 					<section>
 						<h3>Features: arrêtons nous là</h3>
+						<ul>
+							<li>But wait, there's more:</li>
+							<li class="fragment">Async rendering</li>
+							<li class="fragment">fetch-based client</li>
+							<li class="fragment">HTTP Streaming</li>
+						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Bon ok on a vu tout ça mais c'est une lib comme react</li>
@@ -765,9 +790,10 @@
 					<section>
 						<h2>Conclusion</h2>
 						<ul>
-							<li>Espèrons que ça soit le futur des frameworks JS</li>
-							<li>Features manquantes encore:</li>
-							<li>Manque un bootstrap / MUI</li>
+							<li>Don't follow the hype</li>
+							<li class="fragment">Features manquantes : i18n ?</li>
+							<li class="fragment">Manque une "killer-lib" bootstrap / MUI</li>
+							<li class="fragment">Espèrons que ça soit le futur des frameworks JS</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
@@ -782,7 +808,7 @@
 						</aside>
 					</section>
 					<section>
-						<h2>Go further / other solutions</h2>
+						<h2>Alternatives</h2>
 						<ul>
 							<li>Fresh (deno)</li>
 							<li>Marko</li>
@@ -792,9 +818,8 @@
 					<section>
 						<h3>How do i use it on my project ?</h3>
 						<ul>
-							<li><pre>import { qwikify$ } from 'qwik-react';</pre></li>
-							<li>qwikify$(ReactComponent)</li>
-							<li></li>
+							<li class="fragment"><pre>import { qwikify$ } from 'qwik-react';</pre></li>
+							<li class="fragment"><pre>qwikify$(ReactComponent)</pre></li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
@@ -823,7 +848,7 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Questions ?</h3>
+						<h3>Merci</h3>
 					</section>
 				</section>
 			</div>
