@@ -278,7 +278,8 @@
 								<li>Gen 3</li>
 								<li>Utiliser le même framework SPA coté serveur</li>
 								<li>
-									React -> Next, Vue -> Nuxt, Svelte -> SvelteKit, Angular -> nguniversal,
+									React -> Next, Vue -> Nuxt, Svelte -> SvelteKit, Angular ->
+									nguniversal,
 								</li>
 								<li>Re-connecter les deux mondes</li>
 								<li></li>
@@ -350,7 +351,6 @@
 						<h2>La résumabilité</h2>
 						<!-- TODO https://qwik.builder.io/docs/concepts/resumable -->
 						<ul>
-
 							<li class="fragment">Restart vs <u>Pause</u></li>
 							<li class="fragment">
 								Les écouteurs d'évènement sont "sérializés"
@@ -383,7 +383,8 @@
 								</script>
 							</code>
 						</pre>
-						<img class="fragment"
+						<img
+							class="fragment"
 							src="/assets/event-bubbling.drawio.svg"
 							alt="visual representation"
 						/>
@@ -408,7 +409,8 @@
 							<li class="fragment">knows about your code</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
-							Qwik n'est pas uniquement responsable du runtime, mais aussi du buildtime
+							Qwik n'est pas uniquement responsable du runtime, mais aussi du
+							buildtime
 						</aside>
 					</section>
 					<section>
@@ -716,14 +718,15 @@
 						<h2>Qwik city</h2>
 						<ul>
 							<li>Meta-framework</li>
-							<li>page based routing (MDX)</li>
+							<li>file based routing (MDX)</li>
+							<li>Server-Side-Generation</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							Comme React => library d'affichage only Qwik city => super powers.
 						</aside>
 					</section>
 					<section>
-						<h3>Page-based routing</h3>
+						<h3>File-based routing</h3>
 						<!-- todo explain page based routing-->
 						<pre>
 						<code class="hljs" data-trim>
@@ -793,7 +796,9 @@
 							<li>Don't follow the hype</li>
 							<li class="fragment">Features manquantes : i18n ?</li>
 							<li class="fragment">Manque une "killer-lib" bootstrap / MUI</li>
-							<li class="fragment">Espèrons que ça soit le futur des frameworks JS</li>
+							<li class="fragment">
+								Espèrons que ça soit le futur des frameworks JS
+							</li>
 						</ul>
 						<aside class="notes" aria-label="Notes">
 							<ul>
@@ -817,10 +822,10 @@
 					</section>
 					<section>
 						<h3>How do i use it on my project ?</h3>
-						<ul>
-							<li class="fragment"><pre>import { qwikify$ } from 'qwik-react';</pre></li>
-							<li class="fragment"><pre>qwikify$(ReactComponent)</pre></li>
-						</ul>
+						<pre class="fragment">
+						<code class="hljs language-markdown" data-trim>import { qwikify$ } from 'qwik-react';</code></pre>
+						<pre class="fragment">
+						<code class="hljs language-markdown" data-trim>qwikify$(ReactComponent)</code></pre>
 						<aside class="notes" aria-label="Notes">
 							<ul>
 								<li>Pas donné à tout le monde de refaire son front</li>
