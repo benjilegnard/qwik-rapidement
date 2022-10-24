@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/qwik-rapidement/assets/favicon.ff513a43.svg" />
+		
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Qwik, rapidement</title>
+		<script type="module" crossorigin src="/qwik-rapidement/assets/index.52df23e5.js"></script>
+		<link rel="stylesheet" href="/qwik-rapidement/assets/index.8eb0313b.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Qwik, rapidement</h1>
+				</section>
+				<section>
+					<section>
+						<h2>Qwik</h2>
+						<img
+							src="/qwik-rapidement/assets/qwik-logo.svg"
+							alt="Qwik logo"
+							style="width: 400px; height: 400px"
+						/>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Welcome, ice breaker etc...</li>
+								<li>Qui a déjà entendu parler de Qwik ?</li>
+								<li>Qui a lu la doc de Qwik ?</li>
+								<li>
+									Qui est là pour garder la place avant keynote de fermeture ?
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Qwik, historique</h3>
+						<table class="fragment">
+							<tr>
+								<td>
+									<img
+										src="/qwik-rapidement/assets/misko-hevery.jpg"
+										alt="Misko Hevery's profile pictu1.re"
+										class="round"
+									/>
+								</td>
+								<td>
+									<ul>
+										<li>Créé par Misko Hevery</li>
+										<li>Open-sourced fin 2021</li>
+										<li class="fragment">Backé par builder.io</li>
+										<li class="fragment">https://qwik.builder.io</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Misko créateur d'angularJS, co-créateur d'angular 2</li>
+								<li>Sorti en béta finale le 19 septembre 2022</li>
+								<li>Builder.io: (Partytown / Mitosis / Figma&lt;-&gt;HTML)</li>
+								<li>Co créateurs de Stencil (Manu almeida / Adam bradley)</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Qwik, une promesse</h3>
+						<img
+							src="/qwik-rapidement/assets/lighthouse-100.webp"
+							style="width: 500px"
+							alt="performance score"
+						/>
+						<ul>
+							<li class="fragment">Temps de chargement &lt; 1s</li>
+							<li class="fragment">Pas d'Hydratation</li>
+							<li class="fragment">HTML First, "zero JS"</li>
+							<li class="fragment">Time to Interactive de folie</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>En vrai c'est plutôt moins d'1k de JS</li>
+								<li>
+									Qwik nous promet des performances folle car très peu de JS
+								</li>
+								<li>On va donc voir comment ça marche et pourquoi.</li>
+								<li>Générique.</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h2>Benjamin Legrand</h2>
+					<table>
+						<tr>
+							<td>
+								<img
+									src="/qwik-rapidement/assets/benjamin-legrand.png"
+									alt="Benjamin Legrand's profile picture"
+									class="round"
+									style="width: 400px; height: 400px"
+								/>
+							</td>
+							<td>
+								<ul>
+									<li>Tech lead @ onepoint</li>
+									<li>Angular fanboy</li>
+									<li>Typescript addict</li>
+									<li>@benjilegnard</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<section>
+						<h3>Savoir d'où l'on vient</h3>
+						<table>
+							<thead>
+								<tr>
+									<th>1st gen</th>
+									<th>2nd gen</th>
+									<th>3rd gen</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="fragment">
+										<ul>
+											<li>jquery</li>
+											<li>scriptaculous</li>
+											<li>PHP</li>
+											<li>Java/JSP</li>
+											<li>HTTP/HTML</li>
+										</ul>
+									</td>
+									<td class="fragment">
+										<ul>
+											<li>Backbone</li>
+											<li>Angular</li>
+											<li>Knockout</li>
+											<li>React</li>
+											<li>Vue</li>
+										</ul>
+									</td>
+									<td class="fragment">
+										<ul>
+											<li>Next.js</li>
+											<li>@nguniversal</li>
+											<li>Nuxt</li>
+											<li>Sveltekit</li>
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									Qwik fait partie de ce qu'on peut appeler une 4e génération de
+									frameworks JS
+								</li>
+								<li>
+									gen 1 : ruby / PHP + jquery / JS uniquement pour certains
+									éléments.
+								</li>
+								<li>
+									gen 2 : shift mental sur les single page application,
+									backbone, angular, react, svelte, etc...
+								</li>
+								<li>
+									gen 3 : resumable frameworks + islands, fresh, astro.build
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>SPA, Single Page Application</h3>
+						<!-- TODO, maybe google trend graphs -->
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Historiquement page -> server</li>
+								<li>Certaines app déjà dans les années 1990</li>
+								<li>GMail, AngularJS</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>Qu'attends-on d'un framework "SPA" ?</h4>
+						<ul>
+							<li>URL-based routing (#/hash)</li>
+							<li>Client Side Rendering</li>
+							<li>Component-based</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>rendre la donnée,</li>
+								<li>template HTML,</li>
+								<li>arbre de composant</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>1er problème :</h4>
+						<!-- todo loading wheel + page vide -->
+						<table role="presentation">
+							<tr>
+								<td>
+									<img
+										src="/qwik-rapidement/assets/loaders/loader-gmail.png"
+										alt="Loader for gmail"
+										style="width: 400px"
+									/>
+								</td>
+								<td>
+									<img
+										src="/qwik-rapidement/assets/loaders/loader-linkedin.png"
+										alt="Loader for linkedin"
+										style="width: 400px"
+									/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<img
+										src="/qwik-rapidement/assets/loaders/loader-twitter.png"
+										alt="Loader for twitter"
+										style="width: 400px"
+									/>
+								</td>
+								<td>
+									<img
+										src="/qwik-rapidement/assets/loaders/loader-youtube.png"
+										alt="Loader for youtube"
+										style="width: 400px"
+									/>
+								</td>
+							</tr>
+						</table>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>On dépends énormément du JS à cause du CSR</li>
+								<li>Tant qu'on a pas tout le JS</li>
+								<li>technique shadow éléments etc...</li>
+								<li>C'est un problème parce que web vitals</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>2e problème :</h4>
+						<p>Core Web vitals</p>
+						<ul>
+							<li><b>LCP</b>: rapidité d'affichage</li>
+							<li><b>FID/TTI</b>: interactivité</li>
+							<li><b>CLS</b>: stabilité visuelle</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<p>Depuis 2020, pris en compte par le pagerank google</p>
+							<ul>
+								<li>Largest Contentful Paint: rapidité d'affichage</li>
+								<li>
+									First input delay/TTI: rapidité de chargement / utilisabilité
+								</li>
+								<li>Content Layout Shift OSEF</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Une solution ?</h3>
+						<ul>
+							<li class="fragment">Server-Side-Rendering</li>
+							<li class="fragment">
+								Javascript IsoMorphe / Universal (node.js)
+							</li>
+							<li class="fragment">Mais: Nouveau problème</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Gen 3</li>
+								<li>Utiliser le même framework SPA coté serveur</li>
+								<li>
+									React -> Next, Vue -> Nuxt, Svelte -> SvelteKit, Angular ->
+									nguniversal,
+								</li>
+								<li>Re-connecter les deux mondes</li>
+								<li></li>
+							</ul>
+						</aside>
+					</section>
+					<!--
+					<section>
+						<h3>Frameworks SPA + SSR</h3>
+						<table>
+							<thead>
+								<tr>
+									<th>Framework</th>
+									<th>/ SSR Solution</th>
+								</tr>
+							</thead>
+							<tr>
+								<td>React</td>
+								<td>Next.js</td>
+							</tr>
+							<tr>
+								<td>Vue</td>
+								<td>Nuxt</td>
+							</tr>
+							<tr>
+								<td>angular</td>
+								<td>@nguniversal</td>
+							</tr>
+							<tr>
+								<td>Ember.js</td>
+								<td>Fastboost</td>
+							</tr>
+						</table>
+						<aside class="notes" aria-label="Notes">
+							J'ai mis Ember pour troller Tout ces frameworks ont le même
+							problème : la réhydratation.
+						</aside>
+					</section>-->
+				</section>
+				<section>
+					<section>
+						<h2>L'Hydratation</h2>
+						<p>qu'est ce que c'est ?</p>
+						<ul>
+							<li class="fragment"><del>boire de l'eau</del></li>
+							<li class="fragment">
+								Re-connecter le HTML généré par le serveur avec le javascript du
+								client
+							</li>
+							<li class="fragment">
+								re-construire l'arbre de composant, re-connecter les events
+								listener
+							</li>
+							<li class="fragment">
+								On dépends toujours du JS => Time to interactive pas bon
+							</li>
+							<li class="fragment">Double exécution du code</li>
+						</ul>
+					</section>
+					<section>
+						<h2><u>Hydratation</u> vs résumabilité</h2>
+						<img src="/qwik-rapidement/assets/hydrate-vs-resume.drawio.svg" />
+					</section>
+					<section>
+						<h2>Hydratation vs <u>résumabilité</u></h2>
+						<img src="/qwik-rapidement/assets/resume.drawio.svg" />
+					</section>
+					<section>
+						<h2>La résumabilité</h2>
+						<!-- TODO https://qwik.builder.io/docs/concepts/resumable -->
+						<ul>
+							<li class="fragment">Restart vs <u>Pause</u></li>
+							<li class="fragment">
+								Les écouteurs d'évènement sont "sérializés"
+							</li>
+							<li class="fragment">L'état des composant est sérialisé</li>
+							<li class="fragment">
+								Pas de téléchargement de JS quand pas besoin, on est déjà prêt.
+							</li>
+						</ul>
+					</section>
+				</section>
+				<!--
+					INTERNALS OF THE FRAMEWORK
+				-->
+				<section>
+					<section>
+						<h3>Qwik: les features</h3>
+					</section>
+					<section data-auto-animate>
+						<h3 data-id="code-title">le QwikLoader</h3>
+						<pre data-id="code-animation">
+							<code class="hljs" language="html" data-trim data-line-numbers="|4|3|2">
+								<script type="text/template">
+									<html>
+										<body q:base="/build/">
+											<button onClickQrl="./myHandler.js#clickHandler">push me</button>
+											<script>/* Qwikloader */<script>
+										</body>
+									</html>
+								</script>
+							</code>
+						</pre>
+						<img
+							class="fragment"
+							src="/qwik-rapidement/assets/event-bubbling.drawio.svg"
+							alt="visual representation"
+						/>
+						<aside class="notes" aria-label="Notes">
+							Qwikloader is: small: 1 kb minified. fast: 5ms delivered inline in
+							the dom GOAL:
+							<ul>
+								<li>register global browser events.</li>
+								<li>
+									if an event occurs, search the DOM for the corresponding event
+									attribute pointing to the QRL to lazy-load.
+								</li>
+								<li>Lazy-load the event handler and execute it.</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>The optimizer</h2>
+						<ul>
+							<li>Plugin Vite ( https://vitejs.dev/ )</li>
+							<li class="fragment">esbuild + rollup</li>
+							<li class="fragment">knows about your code</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							Qwik n'est pas uniquement responsable du runtime, mais aussi du
+							buildtime
+						</aside>
+					</section>
+					<section>
+						<h4>Optimizer: What you write : $</h4>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const Counter = component$(() => {
+									const store = useStore({ count: 0 });
+									return <button onClick$={() => store.count++}>{store.count}</button>;
+								});
+							</script>
+						</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									Qwik s'occupe tout seul de découper votre code en chunk js.
+								</li>
+								<li>Ici on va se retrouver avec trois chunk.</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h4>Optimizer: What you get</h4>
+
+						<pre><code>const Counter = component(qrl('./chunk-a.js', 'Counter_onMount'));</code></pre>
+						<pre>chunk-a.js</pre>
+						<pre>
+							<code class="hljs language-typescript" data-trim>
+								<script type="text/template">
+								export const Counter_onMount = () => {
+									const store = useStore({ count: 0 });
+									return <button onClick$={qrl(''./chunk-b.js', 'Counter_onClick', [store])}>{store.count}</button>;
+								};
+								</script>
+							</code>
+						</pre>
+						<pre>chunk-b.js</pre>
+						<pre>
+							<code class="hljs language-typescript" data-trim>
+								<script type="text/template">
+									const Counter_onClick = () => {
+										const [store] = useLexicalScope();
+										return store.count++;
+									};
+								</script>
+							</code>
+						</pre>
+					</section>
+					<!-- TODO more slide on the optimizer -->
+					<section>
+						<h2>Serialisation</h2>
+						<p>Events Listener / QRL</p>
+						<pre data-id="code-animation">
+							<code class="hljs language-html" data-trim>
+								<script type="text/template">
+									<div>
+										<button on:click="./chunk-a.js#Counter_button_onClick[0]">0</button>
+									</div>
+								</script>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Serialization: closure</h3>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const Counter = component$(() => {
+									const store = useStore({ count: 0 });
+									return <button onClick$={() => store.count++}>{store.count}</button>;
+								});
+							</script>
+						</code>
+						</pre>
+						<pre data-id="code-animation" class="fragment">
+							<code class="hljs" language="html" data-trim>
+								<script type="text/template">
+									<html>
+									<body q:base="/build/">
+										<button q:obj="456, 123" on:click="./chunk-c.js#Counter_onClick[0,1]">0</button>
+										<script type="qwik/json">
+										{...json...}
+										<script>
+									</body>
+									</html>
+								</script>
+							</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Souvent on utilise JSON</li>
+								<li>limitation : dates, closures,</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<!--
+					Features deep dive
+				-->
+				<section>
+					<section>
+						<h2>Features</h2>
+						<ul>
+							<li>Aventurons nous plus loin</li>
+							<li>Dans la jungle des fonctionnalités</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Component / $syntax</h3>
+						<pre>
+							<code class="hljs language-typescript" language="typescript" data-trim data-id="code-animation">
+								<script type="text/template">
+									export const Counter = component$(() => {
+										const state = useStore({
+											count: 0,
+										});
+										return (
+											<Host>
+												<div>Value is: ${state.count}</div>
+												<button onClick$={() => state.count++}>Increment</button>
+											</Host>
+										);
+									});
+								</script>
+							</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							Qwik est component-based, sur du JSX JSX => mélanger du XML dans
+							du JS. - très proche de React dans l'idée
+						</aside>
+					</section>
+					<section>
+						<h3>React equivalent</h3>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								export function Counter() {
+									const [count, setCount] = useState(0);
+									return (
+										<>
+										<div>
+											Value is: ${count}
+										</div>
+										<button onClick$={() => setCount(count + 1)}>
+											Increment
+										</button>
+										</>
+									)
+								}
+							</script>
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Feature: transclusion</h3>
+						<pre>
+							<!-- todo show slot example -->
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const Collapsible = component$(() => {
+									const store = useStore({ isOpen: true });
+
+									return (
+										<div class="collapsible">
+										<div class="title" onClick$={() => (store.isOpen = !store.isOpen)}>
+											<Slot name="title"></Slot>
+										</div>
+										{store.isOpen ? <Slot /> : null}
+										</div>
+									);
+								});
+							</script>
+						</code>
+						</pre>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								const MyApp = component$(() => {
+									return (
+										<Collapsible>
+										<span q:slot="title">Title text</span>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vulputate accumsan pretium.
+										</Collapsible>
+									);
+								});
+							</script>
+						</code>
+						</pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Content projection</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Feature: hooks</h3>
+						<ul>
+							<li class="fragment">useStore</li>
+							<li class="fragment">useContext</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Même concept qu'en react</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Feature: lifecycle</h3>
+						<ul>
+							<li class="fragment">useMount$</li>
+							<li class="fragment">useServerMount$</li>
+							<li class="fragment">useWatch$</li>
+							<li class="fragment">useClientEffect$</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									useServerMount$() registers a server-mounted hook that only
+									runs on the server when the component is first mounted.
+								</li>
+								<li>useMount$: onInit, exécuté à la création du composant.</li>
+							</ul>
+						</aside>
+					</section>
+					<!--
+					<section>
+						<h2>Feature: Client / Server</h2>
+						<ul>
+							<li>api fetch()</li>
+							<li>node-fetch polyfill</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>OK</li>
+							</ul>
+						</aside>
+					</section>
+				    -->
+					<section>
+						<h2>Feature: Scoped styles</h2>
+						<ul>
+							<li><b>useStyleScoped$()</b> : creates a scoped style</li>
+							<li><b>useStyle$()</b> : creates a global style</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							à noter principalement que Qwik fournit une solution native de
+							CSS-in-JS Pas besoin d'en rajouter une, pas de question à se
+							poser, c'est géré par le build
+						</aside>
+					</section>
+					<!--
+					<section>
+						<h3>Feature: async rendering</h3>
+						<p>HTTP Streaming</p>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								export async function AsyncComp() {
+									const data = await fetch('url');
+									return (
+										<>${data}</>
+									)
+								}
+							</script>
+						</code>
+						</pre>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								export function AllAsync() {
+									return (
+										<SSRStream>
+											<AsyncComp/>
+											<AsyncComp/>
+											<AsyncComp/>
+										</SSRStream>
+									)
+								}
+							</script>
+						</code>
+						</pre>
+					</section>
+				-->
+					<section>
+						<h3>Features: arrêtons nous là</h3>
+						<ul>
+							<li>But wait, there's more:</li>
+							<li class="fragment">Async rendering</li>
+							<li class="fragment">fetch-based client</li>
+							<li class="fragment">HTTP Streaming</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Bon ok on a vu tout ça mais c'est une lib comme react</li>
+								<li>Il manque de quoi en faire un framework</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Qwik city</h2>
+						<ul>
+							<li>Meta-framework</li>
+							<li>file based routing (MDX)</li>
+							<li>Server-Side-Generation</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							Comme React => library d'affichage only Qwik city => super powers.
+						</aside>
+					</section>
+					<section>
+						<h3>File-based routing</h3>
+						<!-- todo explain page based routing-->
+						<pre>
+						<code class="hljs" data-trim>
+							<script type="text/template">
+							| index.mdx
+							| -> /product/[slug]/index.mdx
+							| -> /user/[id]/index.mdx
+							</script>
+							</code>
+						</pre>
+						<ul>
+							<li>
+								<pre>useLocation$</pre>
+							</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>On récupère un object location avec paths et params</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>MDX</h3>
+						<pre>
+							<!-- todo show slot example -->
+						<code class="hljs language-markdown" data-trim>
+							<script type="text/template">
+								---
+								# File: src/routes/some/path/index.mdx
+								title: Hello World Title
+								---
+								import { Counter } from "../../../components/counter/counter";
+
+								This is a simple hello world component.
+
+								<Counter />
+							</script>
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h3>&lt;head&gt; management</h3>
+						<pre>
+						<code class="hljs language-typescript" data-trim>
+							<script type="text/template">
+								// File: src/routes/product/[skuId]/index.tss
+								import { component$ } from '@builder.io/qwik';
+								import type { DocumentHead } from '@builder.io/qwik-city';
+
+								export default component$(() => {...});
+
+								export const head: DocumentHead = {
+									title: 'Product Details',
+									meta: [...],
+									links: [...],
+									styles: [...],
+								};
+							</script>
+						</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Conclusion</h2>
+						<ul>
+							<li>Don't follow the hype</li>
+							<li class="fragment">Features manquantes : i18n ?</li>
+							<li class="fragment">Manque une "killer-lib" bootstrap / MUI</li>
+							<li class="fragment">
+								Espèrons que ça soit le futur des frameworks JS
+							</li>
+						</ul>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>
+									On a vu: comment qwik fonctionne et un survol de son API.
+									Comment
+								</li>
+								<li>
+									Manque encore : comment faire de l'i18n, encore en discussion
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Alternatives</h2>
+						<ul>
+							<li>Fresh (deno)</li>
+							<li>Marko</li>
+							<li>Astro .build</li>
+						</ul>
+					</section>
+					<section>
+						<h3>How do i use it on my project ?</h3>
+						<pre class="fragment">
+						<code class="hljs language-markdown" data-trim>import { qwikify$ } from 'qwik-react';</code></pre>
+						<pre class="fragment">
+						<code class="hljs language-markdown" data-trim>qwikify$(ReactComponent)</code></pre>
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Pas donné à tout le monde de refaire son front</li>
+								<li></li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Performance</h3>
+						<img src="/qwik-rapidement/assets/bus-meme.jpeg" alt="image of a bus marqued " />
+						<aside class="notes" aria-label="Notes">
+							<ul>
+								<li>Description: C'est un petit bus sur lequel est marqué</li>
+								<li>
+									Server side rendering, bundle splitting, tree shaking,
+									optimizing compilers, no-js frameworks
+								</li>
+								<li>
+									Et un gros train marqué GOOGLE TAG MANAGER qui le dégomme
+								</li>
+								<li>
+									La performance, comme l'accessibilité, c'est l'affaire de tous
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Merci</h3>
+					</section>
+				</section>
+			</div>
+		</div>
+		
+	</body>
+</html>
