@@ -15,9 +15,7 @@ let deck = new Reveal({
 		Highlight,
 		Gamepad({
 			threshold: 0.85,
-			debounceTime: 500,
-			invertAxis: false,
-			rotateAxis: true,
+			debounce: 500,
 		}),
 	],
 });
